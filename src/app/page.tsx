@@ -22,13 +22,19 @@ export default function Home() {
         <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto">
           Una aplicación web interactiva que te permite explorar todos los
           personajes del universo de Rick and Morty. Descubre información
-          detallada sobre tus personajes favoritos, su estado, especie y
-          origen.
+          detallada sobre tus personajes favoritos, su estado, especie y origen.
         </p>
 
         <Link href="/characters">
           <Button size="lg" className="text-lg px-8 py-6">
             Ver Personajes
+          </Button>
+        </Link>
+        <br />
+        <br />
+        <Link href="/auth/register">
+          <Button size="lg" className="text-lg px-8 py-6">
+            Registrarse
           </Button>
         </Link>
       </section>

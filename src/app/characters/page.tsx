@@ -61,13 +61,13 @@ function page() {
         <section>
           <Link href="/">
             <nav className="mb-4">
-              <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent flex justify-center py-5">
+              <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent flex justify-center py-5 text-center px-4">
                 Rick and Morty
               </h1>
             </nav>
           </Link>
         </section>
-        <h1 className="flex justify-center text-4xl font-bold py-5 ">
+        <h1 className="flex justify-center text-2xl md:text-4xl font-bold py-5 text-center px-4">
           Rick and Morty Characters
         </h1>
         <Pagination>
