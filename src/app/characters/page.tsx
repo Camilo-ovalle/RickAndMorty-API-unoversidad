@@ -24,7 +24,7 @@ import {
   PaginationPrevious,
 } from '../../components/ui/pagination';
 
-function page() {
+function Page() {
   const [data, setData] = useState<Character[]>();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -132,4 +132,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
