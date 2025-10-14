@@ -1,6 +1,7 @@
 'use client';
 import axios from 'axios';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { useRouter } from 'next/navigation';
@@ -142,10 +143,12 @@ function Page() {
                   </CardHeader>
                   <CardContent>
                     <CardDescription>
-                      <img
+                      <Image
                         className="w-full h-80 rounded"
                         src={character.image}
                         alt={character.name}
+                        width={500}
+                        height={500}
                       />
                       <br />
                       Status: {character.status}

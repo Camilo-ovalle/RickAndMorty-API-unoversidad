@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, MapPin, Activity, User, Calendar } from 'lucide-react';
 import { Character } from '@/interfaces/character.interface';
 import { Button } from '@/components/ui/button';
@@ -54,7 +55,7 @@ export default function CharacterLayout({ character }: CharacterLayoutProps) {
               <Card className="overflow-hidden sticky top-8">
                 <CardContent className="p-0 mt-2.5 mb-2.5">
                   {character.image && (
-                    <img
+                    <Image
                       src={character.image}
                       alt={character.name}
                       width={500}
