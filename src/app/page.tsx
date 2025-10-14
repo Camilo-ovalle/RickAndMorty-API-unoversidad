@@ -25,18 +25,27 @@ export default function Home() {
           detallada sobre tus personajes favoritos, su estado, especie y origen.
         </p>
 
-        <Link href="/characters">
-          <Button size="lg" className="text-lg px-8 py-6">
-            Ver Personajes
-          </Button>
-        </Link>
-        <br />
-        <br />
-        <Link href="/auth/register">
-          <Button size="lg" className="text-lg px-8 py-6">
-            Registrarse
-          </Button>
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/characters">
+            <Button size="lg" className="text-lg px-8 py-6">
+              Ver Personajes
+            </Button>
+          </Link>
+          <Link href="/auth/login">
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-8 py-6"
+            >
+              Iniciar Sesión
+            </Button>
+          </Link>
+          <Link href="/auth/register">
+            <Button size="lg" className="text-lg px-8 py-6">
+              Registrarse
+            </Button>
+          </Link>
+        </div>
       </section>
 
       {/* Features Section */}

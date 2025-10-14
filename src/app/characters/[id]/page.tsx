@@ -5,13 +5,22 @@ import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { Character } from '@/interfaces/character.interface';
 import CharacterLayout from '@/layouts/characterLayout';
+import { useAuthStore } from '@/store/store';
 
 export default function CharacterDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const logged = useAuthStore((state) => state.logged);
   const [character, setCharacter] = useState<Character | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Proteger la ruta - redirigir si no está autenticado
+  useEffect(() => {
+    if (!logged) {
+      router.push('/auth/login');
+    }
+  }, [logged, router]);
 
   useEffect(() => {
     const fetchCharacter = async () => {
@@ -30,10 +39,14 @@ export default function CharacterDetailPage() {
       }
     };
 
-    if (params.id) {
+    if (params.id && logged) {
       fetchCharacter();
     }
-  }, [params.id]);
+  }, [params.id, logged]);
+
+  if (!logged) {
+    return null; // Evitar renderizar mientras redirige
+  }
 
   if (loading) {
     return (

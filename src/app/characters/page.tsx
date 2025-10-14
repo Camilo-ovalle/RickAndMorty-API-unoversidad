@@ -3,6 +3,8 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { unstable_ViewTransition as ViewTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '../../store/store';
 
 import { Character } from '../../interfaces/character.interface';
 import {
@@ -25,9 +27,20 @@ import {
 } from '../../components/ui/pagination';
 
 function Page() {
+  const router = useRouter();
+  const logged = useAuthStore((state) => state.logged);
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+
   const [data, setData] = useState<Character[]>();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    if (!logged) {
+      router.push('/auth/login');
+    }
+  }, [logged, router]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +51,10 @@ function Page() {
       setTotalPages(res.data.info.pages);
       console.log(res.data.info.next);
     };
-    fetchData();
-  }, [currentPage]);
+    if (logged) {
+      fetchData();
+    }
+  }, [currentPage, logged]);
 
   const nextPageHandler = () => {
     setCurrentPage(currentPage + 1);
@@ -55,6 +70,15 @@ function Page() {
     console.log(currentPage);
   };
 
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
+
+  if (!logged) {
+    return null; // Evitar renderizar mientras redirige
+  }
+
   return (
     <>
       <ViewTransition>
@@ -67,9 +91,22 @@ function Page() {
             </nav>
           </Link>
         </section>
-        <h1 className="flex justify-center text-2xl md:text-4xl font-bold py-5 text-center px-4">
-          Rick and Morty Characters
-        </h1>
+        <div className="flex justify-between items-center px-8 mb-4">
+          <h1 className="text-2xl md:text-4xl font-bold text-center flex-1">
+            Rick and Morty Characters
+          </h1>
+          <div className="flex items-center gap-4">
+            <p className="text-sm text-muted-foreground">
+              Bienvenido, {user?.Email}
+            </p>
+            <button
+              onClick={handleLogout}
+              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground font-medium rounded-md text-sm px-4 py-2 transition-colors"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
         <Pagination>
           <PaginationContent>
             <PaginationItem>
